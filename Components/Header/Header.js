@@ -10,7 +10,7 @@ export default function Header() {
         source={require("../../assets/logoPuppies.png")}
         resizeMode="contain"
       />
-      <Text style={styles.text}>¡Bienvenidos a animales encontrados!</Text>
+      <Text style={styles.text}>¡Bienvenidos a mascotas recatadas!</Text>
       <StatusBar backgroundColor="#fff" animated={true} hidden={true} />
     </View>
   );

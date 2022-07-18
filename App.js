@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 //Components
-import List from './Components/List/List';
+import ListContainer from './Components/ListContainer/ListContainer';
 import Header from './Components/Header/Header';
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Header />
-        <List />
+        <ListContainer />
       </View>
     </TouchableWithoutFeedback>
   );

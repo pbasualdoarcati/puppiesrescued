@@ -2,20 +2,20 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  TextInput,
   Text,
   View,
-  Button,
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
   TouchableOpacity,
-  Modal,
 } from "react-native";
 
 //Components
+import ModalItem from "../ModalItem/ModalItem";
+import AddItem from "../AddItem/AddItem";
+import ListItem from "../ListItem/ListItem";
 
-function List() {
+function ListContainer() {
   const [textItem, setTextItem] = useState("");
   const [itemList, setItemList] = useState([]);
   const [itemSelected, setItemSelected] = useState({});
@@ -28,13 +28,15 @@ function List() {
         id: itemList.length + 1,
         date: new Date().toLocaleDateString(),
         value: textItem,
+        rescued: false,
       },
     ]);
     setTextItem("");
   };
 
   const handleChangeText = (text) => {
-    setTextItem(text);
+    let inputText = text.replace(/\s/g, "");
+    setTextItem(inputText);
   };
 
   const onHandlerDelete = (id) => {
@@ -42,6 +44,7 @@ function List() {
     setItemSelected({});
     setModalVisible(!modalVisible);
   };
+
   const onHandlerModal = (id) => {
     setItemSelected(itemList.find((item) => item.id === id));
     setModalVisible(!modalVisible);
@@ -49,87 +52,41 @@ function List() {
   const onHandlerCancel = () => {
     setModalVisible(!modalVisible);
   };
+  const onHandlerRescued = (id) => {
+    setItemList(
+      itemList.map((item) => {
+        if (item.rescued === false) {
+          item.rescued = true;
+        }
+      })
+    );
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
-        >
-          <View style={styles.modal}>
-            <View style={styles.modalView}>
-              <View>
-                <Text style={styles.modalTitle}>Eliminar</Text>
-              </View>
-              <View style={styles.modalMessage}>
-                <Text>¿Esta seguro que desea eliminar la dirección?</Text>
-              </View>
-              <View style={styles.modalMessage}>
-                <Text style={styles.modalItem}>{itemSelected.value}</Text>
-              </View>
-              <View style={styles.modalButton}>
-                <TouchableWithoutFeedback
-                  onPress={() => onHandlerDelete(itemSelected.id)}
-                >
-                  <View style={styles.modalTouchable}>
-                    <Text style={styles.textButton}>Eliminar</Text>
-                  </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={onHandlerCancel}>
-                  <View style={styles.modalTouchable}>
-                    <Text style={styles.textButton}>Cancelar</Text>
-                  </View>
-                </TouchableWithoutFeedback>
-              </View>
-            </View>
-          </View>
-        </Modal>
-        <View>
-          <TextInput
-            placeholder="Ingrese su dirección"
-            value={textItem}
-            onChangeText={handleChangeText}
-            style={styles.textInput}
-            maxLength={20}
-          />
-        </View>
-        <View>
-          <TouchableWithoutFeedback onPress={handlePressAddItem}>
-            <View style={styles.buttonStyle}>
-              <Text style={styles.textButton}>Agregar dirección</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-
-        <FlatList
-          data={itemList}
-          renderItem={(data) => (
-            <TouchableOpacity
-              style={styles.InputResult}
-              key={data.item.id}
-              onPress={() => onHandlerModal(data.item.id)}
-            >
-              <View>
-                <Text style={styles.textResult}>
-                  Dirección: {data.item.value}{" "}
-                </Text>
-                <Text style={styles.textResult}>Fecha: {data.item.date}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.id}
-        ></FlatList>
+        <ModalItem
+          modalVisible={modalVisible}
+          itemSelected={itemSelected}
+          onHandlerCancel={() => onHandlerCancel()}
+          onHandlerDelete={() => onHandlerDelete(itemSelected.id)}
+          onHandlerRescued={() => onHandlerRescued(itemSelected.id)}
+        />
+        <AddItem
+          handlePressAddItem={handlePressAddItem}
+          handleChangeText={handleChangeText}
+          textItem={textItem}
+        />
+        <ListItem
+          itemList={itemList}
+          onHandlerModal={onHandlerModal}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
 }
 
-export default List;
+export default ListContainer;
 
 const styles = StyleSheet.create({
   container: {
@@ -144,6 +101,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     backgroundColor: "#0F1567",
     borderRadius: 20,
+  },
+  buttonStyleOpacity: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    fontSize: 20,
+    backgroundColor: "#0F1567",
+    borderRadius: 20,
+    opacity: 0.5,
   },
   textButton: {
     alignSelf: "center",
