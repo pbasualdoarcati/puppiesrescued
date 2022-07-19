@@ -14,18 +14,25 @@ export default function ListItem(props) {
   return (
     <FlatList
       data={itemList}
+      style={styles.container}
       renderItem={(data) => (
         <TouchableOpacity
           style={styles.InputResult}
           key={data.item.id}
           onPress={() => onHandlerModal(data.item.id)}
+          disabled={data.item.rescued === true ? true : false}
         >
-          <View style={data.item.rescued === true && styles.viewRescued}>
+          <View>
             <Text style={styles.textResult}>Dirección: {data.item.value} </Text>
-                  <Text style={styles.textResult}>Fecha: {data.item.date}</Text>
-                  {data.item.rescued === true && (
-                    <Text style={styles.textRescued}> Devuelto!!!</Text>
-                  )}
+            <Text style={styles.textResult}>Fecha: {data.item.date}</Text>
+            {data.item.rescued === true ? (
+              <Text style={styles.textRescued}> ¡Devuelto!</Text>
+            ) : (
+              <Text style={styles.textNotReturned}>
+                {" "}
+                ¡Todavia sin su dueño!
+              </Text>
+            )}
           </View>
         </TouchableOpacity>
       )}
@@ -35,35 +42,38 @@ export default function ListItem(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: "20%",
+  },
   InputResult: {
     justifyContent: "center",
     alignItems: "center",
     width: 300,
-    borderColor: "black",
+    borderColor: "#000000",
     borderWidth: 0.2,
     marginTop: 10,
-    },
-    viewRescued: {
-        backgroundColor: "#0F1567",  
-        
-    },
+  },
+  viewRescued: {
+    backgroundColor: "#0F1567",
+  },
   textResult: {
     width: 300,
     paddingLeft: 10,
     paddingTop: 10,
     paddingBottom: 10,
     color: "#fff",
-    },
-    textRescued: {
-        fontSize: 25,
-        backgroundColor: "#000000",
-        textAlign: "center",
-        position: "absolute",
-        top: 20,
-        left: 20,
-        right: 20,
-        bottom: 20,
-        color: "#fff",
-        transform: [{ rotate: "-15deg" }],
-  }
+  },
+  textRescued: {
+    fontSize: 25,
+    backgroundColor: "#981113",
+    textAlign: "center",
+    color: "#fff",
+  },
+  textNotReturned: {
+    fontSize: 25,
+    backgroundColor: "#0F1567",
+    textAlign: "center",
+    color: "#fff",
+  },
 });
