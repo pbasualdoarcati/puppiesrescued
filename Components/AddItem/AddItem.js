@@ -17,7 +17,7 @@ const AddItem = (props) => {
       <StyledView>
         <View>
           <StyledTextInput
-            placeholder="¿Encontraste una mascota? ¡Publicalo!"
+            placeholder="¿Encontraste una mascota?  ¡Publicalo!"
             value={textItem}
             onChangeText={handleChangeText}
             maxLength={20}

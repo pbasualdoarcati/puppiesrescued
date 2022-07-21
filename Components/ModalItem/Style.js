@@ -59,13 +59,16 @@ export const ModalViewTouchable = styled.View`
 export const ModalTitle = styled.Text`
   fontSize: 22;
   color: ${Colors.colorModalTitle};
+  fontFamily: PoppinsExtraBold;
 `;
 
 export const ModalTextButton = styled.Text`
   alignSelf: center;
   color: ${Colors.colorText};
+  fontFamily: PoppinsExtraBold;
 `;
 
 export const ModalTextItem = styled.Text`
   fontSize: 30;
+  fontFamily: PoppinsExtraBold;
 `;

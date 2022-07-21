@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 
 import Colors from '../../Constants/Colors';
 
+
 export const StyledContainerView = styled.View`
     marginTop: 10;
     alignItems: center;
@@ -19,4 +20,5 @@ export const StyledImage = styled.Image`
 export const StyledText = styled.Text`
     color: ${Colors.colorText};
     paddingBottom: 10;
+    fontFamily: PoppinsExtraBold;
 `

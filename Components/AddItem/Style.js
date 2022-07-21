@@ -12,7 +12,7 @@ export const StyledView = styled.View`
     justifyContent: center;
 `
 export const StyledTextInput = styled.TextInput`
-    maxWidth: 80%;
+    maxWidth: 90%;
     borderColor: ${Colors.borderColor};
     borderWidth: 1;
     padding-top: 10;
@@ -24,8 +24,10 @@ export const StyledTextInput = styled.TextInput`
     marginLeft: 10;
     marginRight: 10;
     color: ${Colors.colorText};
+    fontFamily: PoppinsExtraBold;
 `
 export const StyledText = styled.Text`
     color: ${Colors.colorText};
     alignSelf: center;
+    fontFamily: PoppinsExtraBold;
 `

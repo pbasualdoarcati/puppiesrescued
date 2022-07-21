@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.colorText,
     paddingBottom: 10,
+    fontFamily: "PoppinsExtraBold",
   },
 });

@@ -44,16 +44,19 @@ export const StyleContainerImageResult = styled.View`
 `
 export const StyledTextResult = styled.Text`
     color: ${Colors.colorText};
+    fontFamily: PoppinsExtraBold;
 `
 export const StyledTextRescued = styled.Text`
     fontSize: 25;
     backgroundColor: ${Colors.colorTextBackgroundRescued};
     textAlign: center;
     color: ${Colors.colorText};
+    fontFamily: PoppinsExtraBold;
 `
 export const StyledTextNotReturned = styled.Text`
     fontSize: 25;
     backgroundColor: ${Colors.colorTextBackgroundNoReturn};
     textAlign: center;
     color: ${Colors.colorText};
+    fontFamily: PoppinsExtraBold;
 `
