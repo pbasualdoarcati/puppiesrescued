@@ -1,33 +1,23 @@
+///Modules and packages
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function Header() {
+//Components
+
+import { StyledContainerView, StyledImage, StyledText } from "./Style";
+
+const Header = () => {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.imgLogo}
+    <StyledContainerView>
+      <StyledImage
+
         source={require("../../assets/logoPuppies.png")}
         resizeMode="contain"
       />
-      <Text style={styles.text}>¡Bienvenidos a mascotas recatadas!</Text>
+      <StyledText>¡Bienvenidos a mascotas recatadas!</StyledText>
       <StatusBar backgroundColor="#fff" animated={true} hidden={true} />
-    </View>
+    </StyledContainerView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop:10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  imgLogo: {
-    width: 150,
-    height: 150,
-  },
-  text: {
-    color: "#fff",
-    paddingBottom: 10,
-  },
-});
+export default Header;

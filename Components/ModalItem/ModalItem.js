@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+///Modules and packages
+import React from "react";
 import {
   Modal,
-  StyleSheet,
   View,
   TouchableWithoutFeedback,
   Text,
 } from "react-native";
 
-export default function ModalItem(props) {
-    const { modalVisible, itemSelected, onHandlerCancel, onHandlerDelete, onHandlerRescued } =
-    props;
+//Components
+import {
+  ModalContainerView,
+  ModalView,
+  ModalViewMessage,
+  ModalViewButton,
+  ModalViewTouchable,
+  ModalTitle,
+  ModalTextButton,
+  ModalTextItem,
+} from "./Style";
+
+const ModalItem = (props) => {
+  const {
+    modalVisible,
+    itemSelected,
+    onHandlerCancel,
+    onHandlerDelete,
+    onHandlerRescued,
+  } = props;
 
   return (
     <View>
@@ -21,90 +38,41 @@ export default function ModalItem(props) {
           setModalVisible(false);
         }}
       >
-        <View style={styles.modal}>
-          <View style={styles.modalView}>
+        <ModalContainerView>
+          <ModalView>
             <View>
-              <Text style={styles.modalTitle}>Mascota rescatada</Text>
+              <ModalTitle>Mascota rescatada</ModalTitle>
             </View>
-            <View style={styles.modalMessage}>
+            <ModalViewMessage>
               <Text>¿Que desea hacer con la publicación?</Text>
-            </View>
-            <View style={styles.modalMessage}>
-              <Text style={styles.modalItem}>{itemSelected.value}</Text>
-            </View>
-            <View style={styles.modalButton}>
-              <TouchableWithoutFeedback
-                onPress={() => onHandlerDelete(itemSelected.id)}
-              >
-                <View style={styles.modalTouchable}>
-                  <Text style={styles.textButton}>Eliminar</Text>
-                </View>
+            </ModalViewMessage>
+            <ModalViewMessage>
+              <ModalTextItem>{itemSelected.value}</ModalTextItem>
+            </ModalViewMessage>
+            <ModalViewButton>
+              <TouchableWithoutFeedback onPress={onHandlerDelete}>
+                <ModalViewTouchable>
+                  <ModalTextButton>Eliminar</ModalTextButton>
+                </ModalViewTouchable>
               </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => onHandlerRescued(itemSelected.id)}>
-                <View style={styles.modalTouchable}>
-                  <Text style={styles.textButton}>Devuelto</Text>
-                </View>
+              <TouchableWithoutFeedback onPress={onHandlerRescued}>
+                <ModalViewTouchable>
+                  <ModalTextButton>Devuelto</ModalTextButton>
+                </ModalViewTouchable>
               </TouchableWithoutFeedback>
-            </View>
+            </ModalViewButton>
             <View>
               <TouchableWithoutFeedback onPress={onHandlerCancel}>
-                <View style={styles.modalTouchable}>
-                  <Text style={styles.textButton}>Cancelar</Text>
-                </View>
+                <ModalViewTouchable>
+                  <ModalTextButton>Cancelar</ModalTextButton>
+                </ModalViewTouchable>
               </TouchableWithoutFeedback>
             </View>
-          </View>
-        </View>
+          </ModalView>
+        </ModalContainerView>
       </Modal>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  modal: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  modalView: {
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    width: "80%",
-    height: "50%",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "10%",
-    flexDirection: "column",
-  },
-  modalTitle: {
-    fontSize: 22,
-    color: "#000052",
-  },
-  modalMessage: {
-    marginBottom: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textButton: {
-    alignSelf: "center",
-    color: "#fff",
-  },
-  modalTouchable: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    margin: "auto",
-    backgroundColor: "#0F1567",
-    borderRadius: 20,
-    width: "50%",
-  },
-  modalButton: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-      marginTop: 15,
-  },
-  modalItem: {
-    fontSize: 30,
-  },
-});
+export default ModalItem;

@@ -2,23 +2,24 @@
 import React from "react";
 import {
   StyleSheet,
-  TextInput,
-  Text,
   View,
   TouchableWithoutFeedback,
 } from "react-native";
 
-export default function AddItem(props) {
+//Components
+import { StyledView, StyledTextInput, StyledText } from './Style'
+import Colors from "../../Constants/Colors";
+
+const AddItem = (props) => {
   const { textItem, handleChangeText, handlePressAddItem } = props;
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+      <StyledView>
         <View>
-          <TextInput
+          <StyledTextInput
             placeholder="¿Encontraste una mascota? ¡Publicalo!"
             value={textItem}
             onChangeText={handleChangeText}
-            style={styles.textInput}
             maxLength={20}
           />
         </View>
@@ -35,47 +36,31 @@ export default function AddItem(props) {
                     : styles.buttonStyle
                 }
               >
-                <Text style={styles.textButton}>Agregar rescatado</Text>
+                <StyledText>Agregar rescatado</StyledText>
               </View>
             </TouchableWithoutFeedback>
           )}
         </View>
-      </View>
+      </StyledView>
     </TouchableWithoutFeedback>
   );
-}
+};
+
+export default AddItem;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#06836E",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textInput: {
-    maxWidth: "80%",
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-    margin: 10,
-    color: "#fff",
-  },
-  textButton: {
-    alignSelf: "center",
-    color: "#fff",
-  },
   buttonStyle: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     fontSize: 20,
-    backgroundColor: "#0F1567",
+    backgroundColor: Colors.colorBackgroundButton,
     borderRadius: 20,
   },
   buttonStyleOpacity: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     fontSize: 20,
-    backgroundColor: "#0F1567",
+    backgroundColor: Colors.colorBackgroundButton,
     borderRadius: 20,
     opacity: 0.5,
   },

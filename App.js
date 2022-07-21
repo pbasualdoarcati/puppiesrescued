@@ -1,32 +1,43 @@
 //Modules and packages
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 
 //Components
-import ListContainer from './Components/ListContainer/ListContainer';
-import Header from './Components/Header/Header';
+import Colors from "./Constants/Colors";
+import ListContainer from "./Components/ListContainer/ListContainer";
+import Header from "./Components/Header/Header";
+import StartPage from "./Pages/StartPage";
 
-export default function App() {
+const App = () => {
+  const [start, setStart] = useState(true);
+  const startPage = () => {
+    start ? setStart(false) : setStart(true);
+  };
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <TouchableWithoutFeedback onPress={startPage}>
       <View style={styles.container}>
-        <Header />
-        <ListContainer />
+        {start === true ? (
+          <StartPage />
+        ) : (
+          <>
+            <Header />
+            <ListContainer />
+          </>
+        )}
+        <StatusBar backgroundColor="#fff" animated={true} hidden={true} />
       </View>
     </TouchableWithoutFeedback>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#06836E',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: Colors.colorBackground,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
